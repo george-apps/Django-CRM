@@ -1,23 +1,23 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
 
 
 class SignUpForm(UserCreationForm):
-    first_name=forms.CharField(label="",widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Email Address'}))
-    last_name=forms.CharField(label="",max_length=50,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'First name'}))
-    email=forms.EmailField(label="",max_length=50,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Last name'}))
+    first_name=forms.CharField(label="",widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'First name'}))
+    last_name=forms.CharField(label="",max_length=50,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Last name'}))
+    email=forms.EmailField(label="",max_length=50,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Email Address'}))
 
     class Meta:
         model=User
         fields=('username','first_name','last_name','email','password1','password2')
 
-
-    def __init__(self,*args,**kwargs):
-        super(SignUpForm,self).__init(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm,self).__init__(*args,**kwargs)
 
         self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['username'].widget.attrs['class'] = 'User name'
+        self.fields['username'].widget.attrs['placeholder'] = 'User name'
         self.fields['username'].label = ""
         self.fields['username'].help_text = '<span class="form-text text-muted"><small>Required.150 characters or fewer.Letters, digits and @/./+/-/_ only.</small></span>'
 
@@ -29,4 +29,26 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'Confirm password'
         self.fields['password2'].label = ""
-        self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before,for verification.></small></span>'
+        self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before,for verification.</small></span>'
+
+
+class AddRecordForm(forms.ModelForm):
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "First name", "Class":"form-control"}), label="")
+
+    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Last name", "Class":"form-control"}), label="")
+
+    email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Email", "Class":"form-control"}), label="")
+
+    phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Phone", "Class":"form-control"}), label="")
+
+    address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Address", "Class":"form-control"}), label="")
+
+    city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "City", "Class":"form-control"}), label="")
+
+    state = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={"placeholder": "State", "Class":"form-control"}), label="")
+
+    zipcode = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={"placeholder": "Zipcode", "Class":"form-control"}), label="")
+
+    class Meta:
+        model = Record
+        exclude = ("user",)
