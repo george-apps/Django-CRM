@@ -1,8 +1,8 @@
 # Django CRM Example Project
 
-## A example CRM web app written in python using the django framework.  
+## An example CRM web app written in python using the django framework.  
 
-This is an example project that was build to learn and get a better understanding of the django framework.The functionalities of the project are:
+This is an example project that was build to learn and get a better understanding of the django framework. The functionalities of the project are:
 
 * Register a user.
 * Login a user.
@@ -14,7 +14,7 @@ This is an example project that was build to learn and get a better understandin
 ## Requirements
 1. Python
 2. Django
-3. Mysql
+3. MYSQL
    
 ## How to install and run the app
 1. Clone this project.
